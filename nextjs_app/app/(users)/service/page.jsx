@@ -2,6 +2,11 @@ import Image from "next/image";
 import React from "react";
 import coder from "@/public/coder.png";
 
+export const metadata = {
+  title: "Service Page",
+  description: "OG",
+};
+
 const ServicePage = () => {
   return (
     <div className="bg-gray-950 min-h-screen py-20 px-4">
