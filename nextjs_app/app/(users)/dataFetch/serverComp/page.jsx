@@ -19,7 +19,7 @@ const DataFetchServer = async (props) => {
   const confidencePercentage = userData.probability * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="rounded-2xl shadow-2xl p-8 max-w-sm w-full relative overflow-hidden">
         {/* Background decoration */}
         <div
@@ -39,8 +39,8 @@ const DataFetchServer = async (props) => {
             <div
               className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-4 ${
                 isMale
-                  ? "bg-gradient-to-br from-blue-400 to-blue-600"
-                  : "bg-gradient-to-br from-pink-400 to-pink-600"
+                  ? "bg-linear-to-br from-blue-400 to-blue-600"
+                  : "bg-linear-to-br from-pink-400 to-pink-600"
               } shadow-lg`}
             >
               <User className="w-12 h-12 text-white" strokeWidth={1.5} />
@@ -83,8 +83,8 @@ const DataFetchServer = async (props) => {
                 <div
                   className={`h-3 rounded-full transition-all duration-500 ${
                     isMale
-                      ? "bg-gradient-to-r from-blue-400 to-blue-600"
-                      : "bg-gradient-to-r from-pink-400 to-pink-600"
+                      ? "bg-linear-to-r from-blue-400 to-blue-600"
+                      : "bg-linear-to-r from-pink-400 to-pink-600"
                   }`}
                   style={{ width: `${confidencePercentage}%` }}
                 ></div>
