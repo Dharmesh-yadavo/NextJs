@@ -1,5 +1,8 @@
 import ProductList from "./ProductList";
 
+//! Query parameter in server side...
+//! http:localhost:3000/products?category=shoes&type=fashion&size=8
+
 const Products = async ({ searchParams }) => {
   //   const searchParam = await props.searchParams;
   //   console.log(searchParam);

@@ -2,6 +2,9 @@
 
 import { use } from "react";
 
+//! Dynamic routing (path parameter) in client side ...
+//! http:localhost:3000/user/Dharmesh/post/123
+
 const PostIdPage = (props) => {
   const user = use(props.params);
 

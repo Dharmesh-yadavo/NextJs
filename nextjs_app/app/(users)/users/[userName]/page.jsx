@@ -1,4 +1,7 @@
 const SingleProfile = async (props) => {
+  //! Dynamic routing (path parameter) in server side ...
+  //! http:localhost:3000/user/Dharmesh
+
   const user = await props.params;
 
   // console.log(user);

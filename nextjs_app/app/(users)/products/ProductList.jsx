@@ -2,6 +2,9 @@
 
 import { useSearchParams } from "next/navigation";
 
+//! Query parameter in client side...
+//! http:localhost:3000/products?category=shoes&type=fashion&size=8
+
 const ProductList = () => {
   const searchParams = useSearchParams();
   //   console.log(Object.fromEntries(searchParams.entries()));
