@@ -11,7 +11,7 @@ export default function NotFoundPage() {
       <div className="max-w-lg w-full text-center">
         {/* Animated 404 */}
         <div className="mb-8">
-          <h1 className="text-8xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 animate-pulse">
+          <h1 className="text-8xl md:text-9xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500 animate-pulse">
             404
           </h1>
           <div className="w-24 h-1 bg-linear-to-r from-blue-400 to-purple-500 mx-auto mt-4 rounded-full"></div>
@@ -30,7 +30,7 @@ export default function NotFoundPage() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="group flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+          <button className="group flex items-center justify-center gap-2 bg-linear-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
             <Home size={20} />
             <Link href="/">
               <span className="hover:text-white">Go Home</span>

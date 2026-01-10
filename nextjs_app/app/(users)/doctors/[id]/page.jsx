@@ -2,6 +2,21 @@ import { db } from "@/config/db";
 import { notFound } from "next/navigation";
 import React from "react";
 
+//! as we have used params it is a dynamic route
+// we need to generate static params for SSG which will pre-render pages at build time for each doctor id
+// (/doctors/1, /doctors/2, etc.)
+// generateStaticParams function fetches all doctor ids from the database and returns them in the required format
+export async function generateStaticParams() {
+  const [doctors] = await db.execute(`select doctor_id from doctors`);
+  return doctors.map((doctor) => ({ id: doctor.doctor_id.toString() }));
+}
+// id is string because params are always string :
+// [
+//   { id: "1" },
+//   { id: "2" },
+//   { id: "3" }
+// ]
+
 const page = async (props) => {
   const params = await props.params;
   //   console.log(params);
