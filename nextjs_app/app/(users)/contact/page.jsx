@@ -1,13 +1,16 @@
 "use client";
-// import { contactAction } from "./contact.action";
+import { Loader } from "lucide-react";
+import { contactAction } from "./contact.action";
+import { useActionState } from "react";
 
 //!  Form Action in Client Component
-const contactAction = async (formData) => {
-  const { fullName, email, message } = Object.fromEntries(formData.entries());
-  console.log(fullName, email, message);
-};
+// const contactAction = async (formData) => {
+//   const { fullName, email, message } = Object.fromEntries(formData.entries());
+//   console.log(fullName, email, message);
+// };
 
 const Contact = () => {
+  const [state, formAction, isPending] = useActionState(contactAction, null);
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-4">
@@ -17,7 +20,7 @@ const Contact = () => {
           </h1>
 
           <div className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-6 border border-gray-800">
-            <form className="space-y-6" action={contactAction}>
+            <form className="space-y-6" action={formAction}>
               <div>
                 <label className="block text-sm font-medium mb-2 text-gray-300">
                   Full Name
@@ -55,12 +58,29 @@ const Contact = () => {
 
               <button
                 type="submit"
+                disabled={isPending}
                 className="w-full bg-pink-600 py-3 rounded-lg"
               >
-                Send Message
+                {isPending ? (
+                  <Loader className="animate-spin" />
+                ) : (
+                  <span> Send Message</span>
+                )}
               </button>
             </form>
           </div>
+
+          <section>
+            {state && (
+              <p
+                className={` p-4 mt-5 text-center capitalize ${
+                  state.success ? "bg-green-500" : "bg-red-500"
+                }`}
+              >
+                {state.message}
+              </p>
+            )}
+          </section>
         </div>
       </div>
     </div>
