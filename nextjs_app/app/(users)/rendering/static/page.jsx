@@ -1,5 +1,11 @@
 import { db } from "@/config/db.jsx";
 
+//! ISR (Incremental Static Regeneration)
+// ISR lets you combine Static Site Generation (SSG) + fresh data
+// ➡️ Pages are pre-built but can update automatically after deployment.
+
+export const revalidate = 30;
+
 const StaticPage = async () => {
   const [doctors] = await db.execute("select * from doctors");
   console.log("Static doctors");
