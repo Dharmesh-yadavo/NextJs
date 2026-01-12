@@ -1,8 +1,9 @@
 "use client";
 import { Loader } from "lucide-react";
 import { contactAction } from "./contact.action";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
 
 //!  Form Action in Client Component
 // const contactAction = async (formData) => {
@@ -12,6 +13,7 @@ import { useFormStatus } from "react-dom";
 
 const Contact = () => {
   const [state, formAction, isPending] = useActionState(contactAction, null);
+
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-4">
@@ -83,6 +85,12 @@ export default Contact;
 const Submit = () => {
   //! if using useActionState, then we dont need to pass props to re-render on form status change
   const { pending, data, method, action } = useFormStatus(); // to re-render on form status change
+  const router = useRouter();
+  useEffect(() => {
+    if (pending) {
+      router.push("/");
+    }
+  }, [pending, router]);
 
   return (
     <button
