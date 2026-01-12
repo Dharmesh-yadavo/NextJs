@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/config/db";
+import { redirect } from "next/navigation";
 
 export const contactAction = async (previousState, formData) => {
   //   console.log("previousState", previousState);
@@ -14,8 +15,12 @@ export const contactAction = async (previousState, formData) => {
       [fullName, email, message]
     );
     return { success: true, message: "form submitted successfully" };
+    // used only in server actions to redirect
+    redirect("/");
   } catch (error) {
     console.log(error);
-    return { success: false, message: "error while submitting" };
+    // its used to use redirect in try-catch block & outside we can use it normally without erri
+    if (error.message === "NEXT_REDIRECT") throw error;
+    if (error) return { success: false, message: "error while submitting" };
   }
 };
