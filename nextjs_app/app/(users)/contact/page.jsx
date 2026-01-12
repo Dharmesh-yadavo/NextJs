@@ -2,6 +2,7 @@
 import { Loader } from "lucide-react";
 import { contactAction } from "./contact.action";
 import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 
 //!  Form Action in Client Component
 // const contactAction = async (formData) => {
@@ -56,17 +57,7 @@ const Contact = () => {
                 />
               </div>
 
-              <button
-                type="submit"
-                disabled={isPending}
-                className="w-full bg-pink-600 py-3 rounded-lg"
-              >
-                {isPending ? (
-                  <Loader className="animate-spin" />
-                ) : (
-                  <span> Send Message</span>
-                )}
-              </button>
+              <Submit />
             </form>
           </div>
 
@@ -88,3 +79,22 @@ const Contact = () => {
 };
 
 export default Contact;
+
+const Submit = () => {
+  //! if using useActionState, then we dont need to pass props to re-render on form status change
+  const { pending, data, method, action } = useFormStatus(); // to re-render on form status change
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full bg-pink-600 py-3 rounded-lg"
+    >
+      {pending ? (
+        <Loader className="animate-spin" />
+      ) : (
+        <span> Send Message</span>
+      )}
+    </button>
+  );
+};
