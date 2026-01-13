@@ -1,7 +1,7 @@
 "use client";
 import { Loader } from "lucide-react";
 import { contactAction } from "./contact.action";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState, useTransition } from "react";
 import { useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 
@@ -12,7 +12,17 @@ import { useRouter } from "next/navigation";
 // };
 
 const Contact = () => {
-  const [state, formAction, isPending] = useActionState(contactAction, null);
+  // const [state, formAction, isPending] = useActionState(contactAction, null);
+  const [isPending, startTransition] = useTransition();
+  const [contactFormRes, setContactFormRes] = useState(null);
+
+  const handleContactSubmit = (formData) => {
+    const { fullName, email, message } = Object.fromEntries(formData);
+    startTransition(async () => {
+      await contactAction({ fullName, email, message });
+      setContactFormRes(res);
+    });
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -23,7 +33,7 @@ const Contact = () => {
           </h1>
 
           <div className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-6 border border-gray-800">
-            <form className="space-y-6" action={formAction}>
+            <form className="space-y-6" action={handleContactSubmit}>
               <div>
                 <label className="block text-sm font-medium mb-2 text-gray-300">
                   Full Name
@@ -63,7 +73,7 @@ const Contact = () => {
             </form>
           </div>
 
-          <section>
+          {/* <section>
             {state && (
               <p
                 className={` p-4 mt-5 text-center capitalize ${
@@ -73,7 +83,7 @@ const Contact = () => {
                 {state.message}
               </p>
             )}
-          </section>
+          </section> */}
         </div>
       </div>
     </div>

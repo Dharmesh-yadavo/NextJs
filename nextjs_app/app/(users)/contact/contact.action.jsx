@@ -3,12 +3,12 @@
 import { db } from "@/config/db";
 import { redirect } from "next/navigation";
 
-export const contactAction = async (previousState, formData) => {
+export const contactAction = async ({ fullName, email, message }) => {
   //   console.log("previousState", previousState);
   try {
     //   const fullName = formData.get("fullName");
     //   const email = formData.get("email");
-    const { fullName, email, message } = Object.fromEntries(formData.entries());
+    // const { fullName, email, message } = Object.fromEntries(formData.entries());
     // console.log(fullName, email, message);
     await db.execute(
       `insert into contact_form (full_name, email, message) values (?, ? , ?)`,
