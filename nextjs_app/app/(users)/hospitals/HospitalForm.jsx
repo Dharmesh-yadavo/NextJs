@@ -1,7 +1,16 @@
+"use client";
+import { useRouter } from "next/navigation";
 // import { useRouter } from "next/navigation";
 import { createHospitalAction } from "./hospital.action";
 
 export const HospitalForm = () => {
+  const router = useRouter();
+  const handleCreateHospitalSubmit = async (formData) => {
+    const data = Object.fromEntries(formData);
+    await createHospitalAction(data);
+    router.refresh();
+  };
+
   return (
     <>
       <div className="max-w-3xl mx-auto p-6">
@@ -10,7 +19,7 @@ export const HospitalForm = () => {
         </h2>
         <form
           className="grid grid-cols-1 gap-4 sm:grid-cols-2 bg-black shadow p-6 rounded-xl "
-          action={createHospitalAction}
+          action={handleCreateHospitalSubmit}
         >
           <input
             className="border p-2 rounded"
