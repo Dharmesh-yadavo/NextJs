@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import { useEffect, useRef } from "react";
 import coder from "@/public/coder.png";
 import { easeInOut, motion } from "motion/react";
+import gsap from "gsap";
 
 // export const metadata = {
 //   title: "Service Page",
@@ -16,6 +17,64 @@ const cardVariant = {
 };
 
 const ServicePage = () => {
+  const cardRef = useRef();
+  const hoverTween = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const element = cardRef.current;
+      // set
+      gsap.set(element, {
+        opacity: 0,
+        y: 40,
+      });
+      // to
+      gsap.to(element, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleMouseEnter = () => {
+    if (!cardRef.current) return;
+
+    if (hoverTween.current) {
+      hoverTween.current.kill();
+    }
+
+    hoverTween.current = gsap.to(cardRef.current, {
+      duration: 0.3,
+      y: -50,
+      scale: 1.05,
+      boxShadow:
+        "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+
+    // Kill any existing hover animation
+    if (hoverTween.current) {
+      hoverTween.current.kill();
+    }
+
+    hoverTween.current = gsap.to(cardRef.current, {
+      duration: 0.3,
+      y: 0,
+      scale: 1,
+      boxShadow:
+        "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      ease: "power2.in",
+    });
+  };
+
   return (
     <div className="bg-gray-950 min-h-screen py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -91,7 +150,12 @@ const ServicePage = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white rounded-2xl p-10 flex flex-col items-center text-center shadow-xl">
+          <div
+            ref={cardRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className="bg-white rounded-2xl p-10 flex flex-col items-center text-center shadow-xl"
+          >
             <div className="w-24 h-24 rounded-full flex items-center justify-center text-2xl font-bold mb-6 bg-purple-100 text-purple-600">
               MJ
             </div>
