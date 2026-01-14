@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/config/db";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 
 export const createHospitalAction = async (data) => {
   try {
@@ -14,7 +14,7 @@ export const createHospitalAction = async (data) => {
     );
 
     //! it is used to re-fetch the data on the specified path
-    revalidatePath("/hospitals");
+    // revalidatePath("/hospitals");
 
     return { success: true, message: "Hospital data submitted successfully" };
   } catch (error) {
